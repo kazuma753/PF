@@ -1,4 +1,5 @@
 <% #いいねしているかしていないかの分岐 %>
+<% if user_signed_in? %>
 <% if Favorite.find_by(user_id: current_user.id, post_id: post.id) %>
   <%= link_to(post_favorites_path(post), method: :delete, remote: true) do %>
   <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
@@ -9,3 +10,4 @@
     <% end %>
 <% end %>
 <%= @post.favorites.length %>
+<% end %>
