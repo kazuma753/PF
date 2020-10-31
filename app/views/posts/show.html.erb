@@ -1,0 +1,63 @@
+<h1><%= @post.user.name %>さんの投稿詳細ページ</h1>
+<%= render 'users/list', user: @user %>
+    <table class="table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>ツイート</th>
+                <th>Opinion</th>
+                <th></th>
+            </tr>
+        </thead>
+
+            <tr>
+                <td>
+                    <%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %><br>
+                        <%=link_to @user.name ,user_path(@user)%>
+                </td>
+            <td><%=@post.body%></td>
+
+                <td>
+                    
+                </td>
+
+                <td>
+                    <% if current_user==@user %>
+                        <%= link_to "削除", post_path(@post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+                    <% end %>
+                </td>
+            </tr>
+    </table>
+    <%= form_with model: @comment,url:post_comments_path(@post) do |f| %>
+        <div class="row">
+            <div class="col-sm-12">
+            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+        </div>
+        </div>
+        <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+    <% end %>
+    <% @comments.each do |comment| %>
+        <li class="comment">
+            <div class="comment-body bb">
+                    <div class="comment-avatar">
+                    <div class="avatar">
+                        <%= attachment_image_tag comment.user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %>
+                    </div>
+                    </div>
+                <div class="comment-text">
+                <div class="comment-author clearfix">
+                    <a href="#" class="link-author"><%= comment.user.name %></a>
+                    <span class="comment-meta">
+                    <span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
+                    </span>
+                </div>
+                <div class="comment-entry"><%= comment.comment %></div>
+                    <% if comment.user == current_user %>
+                        <div>
+                            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, class: "btn btn-danger pull-right" %>
+                        </div>
+                    <% end %>
+                </div>
+            </div>
+        </li>
+    <% end %>

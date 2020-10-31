@@ -1,0 +1,32 @@
+// Place all the styles related to the homes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  .clearfix::after {
+    content: "";
+    display: block;
+  
+    clear: both;
+  }
+  
+  .head-line{
+  background-color: bisque;
+  }
+  
+  .title{
+   color:green;
+  }
+  
+  .nav-item{
+  color: gray;
+  }
+  
+  .nav-list-item{
+      list-style: none;
+  float:right;
+  }

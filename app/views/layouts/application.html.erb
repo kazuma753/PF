@@ -10,6 +10,45 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="head-line clearfix">
+      <nav class="nav navbar-nav navbar-left">
+        <h2 class="title">surogram</h2>
+      </nav>
+      <div class="container"> 
+        <h3 class="nav-item">
+          <div class="row"> 
+          <nav>
+            <ul class="nav navbar-nav navbar-right">
+            
+            <% if user_signed_in? %>
+
+              <li><%= link_to " top",root_path, class: "glyphicon glyphicon-top top"%></li>
+
+              <li><%= link_to " my",my_user_path(current_user.id) , class: "glyphicon glyphicon-my my"%></li>
+
+              <li><%= link_to " Logout",destroy_user_session_path, method: :delete , class: "glyphicon glyphicon-log-out logout"%></li>
+
+              <% else %>
+
+              <li><%= link_to " top",root_path, class: "glyphicon glyphicon-top top" %></li>
+
+              <li><%= link_to " About",home_about_path , class: "glyphicon glyphicon-link about" %></li>
+
+              <li><%= link_to " sign up",new_user_registration_path , class: "glyphicon glyphicon-edit sign_up" %></li>
+
+              <li><%= link_to " login",new_user_session_path ,class: "glyphicon glyphicon-log-in sign in"%></li>
+            <% end %>
+            
+            </ul>
+          </nav>
+          </div>
+        </h3>
+       
+      </div>
+    </header>
+      <%= yield %>
+        <div class="col-xs-3 col-xs-offset-9">
+          <p>CopyRight surogram.inc</p>
+        </div>
   </body>
 </html>
