@@ -3,38 +3,40 @@
     <div class="row">
     <table class="table">
         <tbody>
+        <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
             <tr>
                 <th>name</th>
-                <th><%= @user.name %></th>
+                <th><%= current_user.name %></th>
             </tr>
 
             <tr>
                 <th>紹介文</th>
-                <th><%= @user.introduction %></th>
+                <th><%= current_user.introduction %></th>
             </tr>
 
             <tr>
                 <th>メールアドレス</th>
-                <th><%= @user.email %></th>
+                <th><%= current_user.email %></th>
             </tr>
-            <%#= @user.encrypted_password %>
             <tr>
                 <th>好きな機種</th>
-                <th><%= @user.favirite_machine %></th>
+                <th><%= current_user.favirite_machine %></th>
             </tr>
         </tbody>
     </table>
     <button type="button" class="btn btn-success"><%= link_to "編集", edit_user_path(@user.id) %></button>
     
             <div class="col-xs-12"> 
-<%= render 'posts/list', post: @post %>
+            <%= render 'posts/list', post: @post %>
 
             <table class="table">
                     <thead>
                         <tr>
                             <th></th>
+                            <th>投稿画像</th>
                             <th>ツイート</th>
                             <th>Opinion</th>
+                            <th>いいね</th>
                             
                         </tr>
                     </thead>
@@ -44,11 +46,20 @@
                         <td>
                             <%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %>
                         </td>
+
+                        <td>
+                            <%= attachment_image_tag post, :image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
+                        </td>
+
                         <td>
                             <%= post.body %>
                         </td>
+
                         <td>
+                            <%= link_to "コメント数 ", post_path(post) %><%= @post.comments.count %>
+                            <%= render 'users/likes', post: post %>
                         </td>
+
                         <td>
                             <%= link_to "削除", post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
                         </td>

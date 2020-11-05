@@ -6,19 +6,23 @@
                 <th></th>
                 <th>ツイート</th>
                 <th>Opinion</th>
-                <th></th>
+                <th>いいね</th>
             </tr>
         </thead>
 
             <tr>
                 <td>
-                    <%= attachment_image_tag @user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %><br>
+                    <%= attachment_image_tag @user, :profile_image,format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %><br>
                         <%=link_to @user.name ,user_path(@user)%>
                 </td>
-            <td><%=@post.body%></td>
 
                 <td>
-                    
+                <%=@post.body%>
+                </td>
+
+                <td>
+                    コメント数 <%= @post.comments.count %>
+                    <%= render 'users/likes', post: @post %>
                 </td>
 
                 <td>
@@ -28,36 +32,46 @@
                 </td>
             </tr>
     </table>
-    <%= form_with model: @comment,url:post_comments_path(@post) do |f| %>
-        <div class="row">
-            <div class="col-sm-12">
-            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-        </div>
-        </div>
-        <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
-    <% end %>
-    <% @comments.each do |comment| %>
-        <li class="comment">
-            <div class="comment-body bb">
-                    <div class="comment-avatar">
-                    <div class="avatar">
-                        <%= attachment_image_tag comment.user, :profile_image,　format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %>
-                    </div>
-                    </div>
-                <div class="comment-text">
-                <div class="comment-author clearfix">
-                    <a href="#" class="link-author"><%= comment.user.name %></a>
-                    <span class="comment-meta">
-                    <span class="comment-date"><%= comment.created_at.strftime('%Y/%m/%d') %></span>
-                    </span>
-                </div>
-                <div class="comment-entry"><%= comment.comment %></div>
-                    <% if comment.user == current_user %>
-                        <div>
-                            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, class: "btn btn-danger pull-right" %>
-                        </div>
-                    <% end %>
-                </div>
+    <% if user_signed_in? %>
+        <%= form_with model: @comment,url:post_comments_path(@post) do |f| %>
+            <div class="row">
+                <div class="col-sm-12">
+                <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
             </div>
+            </div>
+            <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
+        <% end %>
+    <% end %>
+    <table class="table">
+    <thead>
+    <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <h2>コメント</h2>
+    <% @comments.each do |comment| %>
+            <tr>
+                <td>
+                    <%= attachment_image_tag comment.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %><br>
+                        <a href="#" class="link-author"><%= comment.user.name %></a><br>
+                    <%= comment.created_at.strftime('%Y/%m/%d') %>
+                </td>
+
+                <td>
+                    <div class="comment-entry"><%= comment.comment %></div>
+                </td>
+
+                <td>
+                    <% if comment.user == current_user %>
+                        <%= link_to "削除", post_comments_path(comment), method: :delete, class: "btn btn-danger pull-right" %>
+                    <% end %>
+                <td>
+            </tr>
+            
         </li>
     <% end %>
+    </tbody>
+</table>

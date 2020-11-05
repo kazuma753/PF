@@ -19,8 +19,14 @@
                 <td>
                     <%= post.body %>
                 </td>
+
                 <td>
+                    <%= link_to "コメントをする", post_path(post) %>｜
+                    <i class="fa fa-comment"></i>
+                    コメント数 <%= post.comments.count %>
                 </td>
+                <%= render 'users/likes', post: post %>
+
                 <td>
                     <%= link_to "削除", post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
                 </td>

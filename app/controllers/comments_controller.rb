@@ -8,8 +8,11 @@ class CommentsController < ApplicationController
     comment.save
     redirect_to request.referer
     end
-  
+
     def destroy
+        post = Comment.find(params[:post_id])  # データ(レコード)を1件取得
+        post.destroy  # データ（レコード）を削除
+        redirect_to request.referer  # リダイレクト 
     end
 
     private

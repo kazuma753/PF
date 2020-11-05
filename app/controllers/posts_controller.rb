@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-
+    before_action :correct_user, only: [:edit, :update, :destroy]
     def new
         @post = Post.new
     end
@@ -31,9 +31,17 @@ class PostsController < ApplicationController
         post.destroy  # データ（レコード）を削除
         redirect_to request.referer  # リダイレクト 
     end
+
         private
         # ストロングパラメータ
         def post_params
-            params.require(:post).permit(:body)
+            params.require(:post).permit(:body, :image, :profile_image)
         end
-    end
+
+        def correct_user
+            unless Post.find(params[:id]).user.id.to_i == current_user.id
+                redirect_to request.referer
+            end
+        end
+
+end
