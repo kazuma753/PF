@@ -1,7 +1,7 @@
 <h1>top</h1>
 <%= render 'homes/ranks', all_ranks: @all_ranks, post: @post %> 
         <table class="table">
-       
+
         <% if @posts[0].class == Post %>
         <thead>
         <tr>
@@ -16,9 +16,10 @@
         </tr>
     </thead>
 
-    <p>検索</p>
+    <p>検索</p><span class="glyphicon glyphicon-search" aria-hidden="true"></span>
         <%= form_tag(homes_search_path,:method => 'get') do %>
             <%= text_field_tag :search %>
+            
             <%= submit_tag 'Search', :name => nil %>
         <% end %>
     <tbody>
@@ -37,11 +38,9 @@
                     <% end %>
                 <% end %>
             </td>
-
             <td>
                 <%= link_to "詳細ページ", post_path(post) %>
             </td>
-           
             <td>
                 <%= attachment_image_tag post, :image, format: 'jpeg', fallback: "no_image.jpg", size: "120x120" %>
             </td>
@@ -102,13 +101,12 @@
                             <%= post.name %>
                         <% end %>
                     <% else %>
-                        <%= link_to my_user_path(user.id) do %>
+                        <%= link_to my_user_path(@users) do %>
                             <%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %><br>
                             <%= post.user.name %>
                         <% end %>
                     <% end %>
                 </td>
-    
                 <td>
                     <%= link_to "詳細ページ", post_path(post) %>
                 </td>

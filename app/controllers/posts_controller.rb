@@ -20,9 +20,11 @@ class PostsController < ApplicationController
         @post = Post.new(post_params)
         @post.user_id = current_user.id
         if @post.save
-            redirect_to my_user_path(current_user.id), notice: 'You have creatad book successfully.'
+            redirect_to my_user_path(current_user.id)
         else
-            redirect_to request.referer #元いたページに遷移する
+            @user = current_user 
+            @posts = @user.posts
+            render 'users/my'
         end
     end
 

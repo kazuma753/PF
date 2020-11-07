@@ -22,9 +22,9 @@
             
             <% if user_signed_in? %>
 
-              <li><%= link_to " top",root_path, class: "glyphicon glyphicon-top top"%></li>
+              <li><%= link_to " top",root_path, class: "glyphicon glyphicon-home top"%></li>
 
-              <li><%= link_to " my",my_user_path(current_user.id) , class: "glyphicon glyphicon-my my"%></li>
+              <li><%= link_to " my",my_user_path(current_user.id) , class: "glyphicon glyphicon-user my"%></li>
 
               <li><%= link_to " Logout",destroy_user_session_path, method: :delete , class: "glyphicon glyphicon-log-out logout"%></li>
 
