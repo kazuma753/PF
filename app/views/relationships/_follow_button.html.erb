@@ -1,3 +1,4 @@
+
 <% if user_signed_in? %>
     <% unless current_user == user %>
         <% if current_user.following?(user) %>

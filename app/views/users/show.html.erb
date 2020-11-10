@@ -7,7 +7,6 @@
     <th></th>
     <th>ツイート</th>
     <th>Opinion</th>
-    
 </tr>
 </thead>
     <tbody>
@@ -28,7 +27,9 @@
                 <%= render 'users/likes', post: post %>
 
                 <td>
-                    <%= link_to "削除", post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+                    <% if post == current_user %>
+                        <%= link_to "削除", post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+                    <% end %>
                 </td>
             </tr>
         <% end %>

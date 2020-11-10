@@ -22,6 +22,19 @@
                 <th>好きな機種</th>
                 <th><%= current_user.favirite_machine %></th>
             </tr>
+            <tr>
+                <th>follow</th>
+                <th><%= link_to following_user_path(@user) do %>
+                    <%= @user.followings.count %>
+                <% end %>
+                </th>
+            </tr>
+            <tr>
+                <th>follower</th>
+                <th><%= link_to followers_user_path(@user) do %>
+                    <%= @user.followers.count %>
+                <% end %></th>
+            <tr>
         </tbody>
     </table>
     <button type="button" class="btn btn-success"><%= link_to "編集", edit_user_path(@user.id) %></button>

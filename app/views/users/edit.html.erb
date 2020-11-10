@@ -4,8 +4,6 @@
             <h3>登録情報編集ページ</h3>
         </div>
     </div>
-    <div class="row">
-	 <div class="col-xs-3">
         <%= form_for(@user) do |f| %>
             <%= attachment_image_tag @user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %>
             <%= f.attachment_field :profile_image, placeholder: "プロフィール画像", class: "user-edit-form" %>
@@ -17,7 +15,7 @@
                 <%= f.text_field :introduction %>
             <h4>好きな機種</h4>
                 <%= f.text_area :favirite_machine %>
-                <%= f.submit "Update User", class:"btn btn-lg btn-base-1 mt-20 pull-right" %>
+                <%= f.submit "Update User", class:"btn btn-lg btn-info mt-20 " %>
 
         <% end %>
 </div>

@@ -1,11 +1,13 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-3">
+            <div class="col-xs-6">
             <%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
-            <div class="col-xs-8">
-                <% if user_signed_in? %>
-                    <%= render 'relationships/follow_button', user: user %> 
-                <% end %>
+                <div class="test">
+                    <% if user_signed_in? %>
+                        <%= render 'relationships/follow_button', user: user %>
+                    <% end %>
+                </div>
             </div>
         </div>
     </div>
@@ -13,29 +15,29 @@
                 <tbody>
                 <tr>
                     <th>name</th>
-                    <th><%= user.name %></th>
+                    <th><%= @user.name %></th>
                 </tr>
                 <tr>
                     <th>introduction</th>
-                    <th><%= user.introduction %></th>
+                    <th><%= @user.introduction %></th>
                 </tr>
                 
                 <tr>
                     <th>好きな機種</th>
-                    <th><%= user.favirite_machine %></th>
+                    <th><%= @user.favirite_machine %></th>
                 </tr>
                 <tr>
 
                 <th>follow</th>
                 <th><%= link_to following_user_path(user) do %>
-                    <%= user.followings.count %>
+                    <%= @user.followings.count %>
                 <% end %></th>
                 </tr>
 
                 <tr>
                 <th>follower</th>
                 <th><%= link_to followers_user_path(user) do %>
-                    <%= user.followers.count %>
+                    <%= @user.followers.count %>
                 <% end %></th>
                 </tr>
                 <tr>

@@ -8,33 +8,36 @@
         
     </tr>
 </thead>
+<div class="container">
+  <div class="row">
+        <tbody>
 
-<tbody>
+        <tr>
+        <th></th>
+            <th>
+                <% all_ranks.each.with_index(1) do |all_rank,i| %>
+                    <p><%= i %> 位</p>
+                        <%= attachment_image_tag all_rank.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %>
+                        <%= all_rank.user.name %> さんの投稿
+                        <%= attachment_image_tag all_rank, :image, format: 'jpeg', fallback: "no_image.jpg", size: "120x120" %>
+                        <%= all_rank.body %> |
+                    いいね <%= all_rank.favorites.count %>
+                <% end %>
+            </th>
 
-<tr>
-<th></th>
-    <th>
-        <% all_ranks.each.with_index(1) do |all_rank,i| %>
-            <p><%= i %> 位</p>
-                <%= attachment_image_tag all_rank.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %>
-                <%= all_rank.user.name %> さんの投稿
-                <%= attachment_image_tag all_rank, :image, format: 'jpeg', fallback: "no_image.jpg", size: "120x120" %>
-                <%= all_rank.body %> |
-            いいね <%= all_rank.favorites.count %>
-        <% end %>
-    </th>
-
-    <th>
-        <% all_ranks.each.with_index(1) do |all_rank,i| %>
-            <p><%= i %> 位</p>
-            <%= attachment_image_tag all_rank.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %>
-            <%= all_rank.user.name %>さんの投稿
-            <%= attachment_image_tag all_rank, :image, format: 'jpeg', fallback: "no_image.jpg", size: "120x120" %>
-            <%= all_rank.body %>
-            <%= all_rank.comment %> |
-            コメント数 <%= all_rank.comments.count %>
-        <% end %>
-    </th>
-</tr>
-</tbody>
+            <th>
+                <% all_ranks.each.with_index(1) do |all_rank,i| %>
+                    <p><%= i %> 位</p>
+                    <%= attachment_image_tag all_rank.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %>
+                    <%= all_rank.user.name %>さんの投稿
+                    <%= attachment_image_tag all_rank, :image, format: 'jpeg', fallback: "no_image.jpg", size: "120x120" %>
+                    <%= all_rank.body %>
+                    <%= all_rank.comment %> |
+                    コメント数 <%= all_rank.comments.count %>
+                <% end %>
+            </th>
+        </tr>
+        </tbody>
+    </div>
+</div>
 </table>

@@ -13,7 +13,7 @@
             <tr>
                 <td>
                     <%= attachment_image_tag @user, :profile_image,format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %><br>
-                        <%=link_to @user.name ,user_path(@user)%>
+                        <%=link_to @post.user.name ,user_path(@user)%>
                 </td>
 
                 <td>
@@ -33,29 +33,32 @@
             </tr>
     </table>
     <% if user_signed_in? %>
-        <%= form_with model: @comment,url:post_comments_path(@post) do |f| %>
+        <%= form_with model: @comment,url:post_comments_path(@post),local: true do |f| %>
+            <%= render 'layouts/error_messages', model: f.object %>
             <div class="row">
                 <div class="col-sm-12">
-                <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-            </div>
+                    <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+                </div>
             </div>
             <%= f.submit "送信する", class: "btn btn-lg btn-base-1 mt-20 pull-right" %>
         <% end %>
     <% end %>
     <table class="table">
     <thead>
-    <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-    </tr>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
     </thead>
     <tbody>
     <h2>コメント</h2>
     <% @comments.each do |comment| %>
             <tr>
                 <td>
+                <%= link_to user_path(comment.user) do %>
                     <%= attachment_image_tag comment.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %><br>
+                    <% end %>
                         <a href="#" class="link-author"><%= comment.user.name %></a><br>
                     <%= comment.created_at.strftime('%Y/%m/%d') %>
                 </td>
