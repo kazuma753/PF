@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-
+    before_action :correct_user, only: [:edit, :update, :destroy]
     def new
         @post = Post.new
     end
@@ -20,9 +20,11 @@ class PostsController < ApplicationController
         @post = Post.new(post_params)
         @post.user_id = current_user.id
         if @post.save
-            redirect_to my_user_path(current_user.id), notice: 'You have creatad book successfully.'
+            redirect_to my_user_path(current_user.id)
         else
-            redirect_to request.referer #元いたページに遷移する
+            @user = current_user 
+            @posts = @user.posts
+            render 'users/my'
         end
     end
 
@@ -31,9 +33,16 @@ class PostsController < ApplicationController
         post.destroy  # データ（レコード）を削除
         redirect_to request.referer  # リダイレクト 
     end
+
         private
         # ストロングパラメータ
         def post_params
-            params.require(:post).permit(:body)
+            params.require(:post).permit(:body, :image, :profile_image)
         end
-    end
+
+        def correct_user
+            unless Post.find(params[:id]).user.id.to_i == current_user.id
+                redirect_to request.referer
+            end
+        end
+end

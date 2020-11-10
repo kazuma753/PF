@@ -76,3 +76,5 @@ gem 'dotenv-rails'
 group :production do
   gem 'mysql2'
 end
+gem 'activeadmin'
+gem 'rails-i18n'

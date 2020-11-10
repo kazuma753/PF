@@ -10,7 +10,6 @@
   .clearfix::after {
     content: "";
     display: block;
-  
     clear: both;
   }
   
@@ -19,7 +18,11 @@
   }
   
   .title{
-   color:green;
+  color:green;
+  }
+
+  .top{
+  padding: 20px;
   }
   
   .nav-item{
@@ -29,4 +32,14 @@
   .nav-list-item{
       list-style: none;
   float:right;
+  }
+
+  .about{
+    color: red;
+    text-align: center;
+    margin: 20px;
+  }
+
+  .about-text{
+    float: inline-start;
   }

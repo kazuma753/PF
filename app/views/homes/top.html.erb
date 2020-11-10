@@ -1,34 +1,48 @@
-<h1>top</h1>
+<h1><div class="top" style="padding: 20px;">top</div></h1>
+<%= render 'homes/ranks', all_ranks: @all_ranks, post: @post %> 
         <table class="table">
+
+        <% if @posts[0].class == Post %>
         <thead>
-            <tr>
-                <th></th>
-                <th>投稿詳細</th>
-                <th>ツイート</th>
-                <th></th>
-                <th>Opinion</th>
-                
-            </tr>
-        </thead>
-        <tbody>
-        <% @posts.each do |post| %>
+        <tr>
+            <th></th>
+            <th>投稿詳細</th>
+            <th>投稿画像</th>
+            <th>ツイート</th>
+            <th></th>
+            <th>Opinion</th>
+            <th>いいね</th>
+            
+        </tr>
+    </thead>
+
+    <p>検索</p><span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+        <%= form_tag(homes_search_path,:method => 'get') do %>
+            <%= text_field_tag :search %>
+            
+            <%= submit_tag 'Search', :name => nil %>
+        <% end %>
+    <tbody>
+    <% @posts.each do |post| %>
         <tr>
             <td>
-                <% if post.user != current_user %>
+                <% if post == current_user %>
                     <%= link_to user_path(post.user) do %>
-                        <%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %>
-                        <%= post.user.name %>
+                        <%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %><br>
+                        <%= post.name %>
                     <% end %>
                 <% else %>
-                    <%= link_to my_user_path(current_user.id) do %>
-                        <%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %>
+                    <%= link_to user_path(post.user.id) do %>
+                        <%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %><br>
                         <%= post.user.name %>
                     <% end %>
                 <% end %>
             </td>
-
             <td>
                 <%= link_to "詳細ページ", post_path(post) %>
+            </td>
+            <td>
+                <%= attachment_image_tag post, :image, format: 'jpeg', fallback: "no_image.jpg", size: "120x120" %>
             </td>
 
             <td>
@@ -36,17 +50,99 @@
             </td>
 
             <td>
-                <%= link_to "コメントをする", post_path(post) %>｜
-                <i class="fa fa-comment"></i>
-                コメント数 <%= @post.comments.count %>
+                <% if user_signed_in? %>
+                    <%= link_to "コメントをする", post_path(post) %>｜
+                    <i class="fa fa-comment"></i>
+                <% end %>
+                コメント数 <%= post.comments.count %>
+            </td>
+
+            <td>
+                <% if user_signed_in? %>
+                    <%= render 'relationships/follow_button', user: post.user %> 
+                <% end %>
             </td>
 
             <%= render 'users/likes', post: post %>
 
             <td>
-                <%= link_to "削除", post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+                <% if post.user == current_user %>
+                    <%= link_to "削除", post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+                <% end %>
             </td>
         </tr>
+        <% end %>
+        <% else %>
+        <thead>
+        <tr>
+            <th></th>
+            <th>投稿詳細</th>
+            <th>投稿画像</th>
+            <th>ツイート</th>
+            <th></th>
+            <th>Opinion</th>
+            <th>いいね</th>   
+        </tr>
+    </thead>
+
+    <p>検索</p>
+        <%= form_tag(homes_search_path,:method => 'get') do %>
+            <%= text_field_tag :search %>
+            <%= submit_tag 'Search', :name => nil %>
+        <% end %>
+    <tbody>
+        <% @users.each do |post| %>
+        <% post.posts.each do |post| %>
+            <tr>
+                <td>
+                    <% if post == current_user %>
+                        <%= link_to user_path(post) do %>
+                            <%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %><br>
+                            <%= post.name %>
+                        <% end %>
+                    <% else %>
+                        <%= link_to my_user_path(@users) do %>
+                            <%= attachment_image_tag post.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %><br>
+                            <%= post.user.name %>
+                        <% end %>
+                    <% end %>
+                </td>
+                <td>
+                    <%= link_to "詳細ページ", post_path(post) %>
+                </td>
+
+                <td>
+                    <%= attachment_image_tag post, :image, format: 'jpeg', fallback: "no_image.jpg", size: "120x120" %>
+                </td>
+    
+                <td>
+                    <%= post.body %>
+                </td>
+
+                <td>
+                    <% if user_signed_in? %>
+                        <%= link_to "コメントをする", post_path(post) %>｜
+                        <i class="fa fa-comment"></i>
+                    <% end %>
+                    コメント数 <%= post.comments.count %>
+                </td>
+    
+                <td>
+                    <% if user_signed_in? %>
+                        <%= render 'relationships/follow_button', user: post %> 
+                    <% end %>
+                </td>
+    
+                <%= render 'users/likes', post: post %>
+    
+                <td>
+                    <% if post == current_user %>
+                        <%= link_to "削除", post_path(post), method: :delete, "data-confirm" => "本当に削除しますか？" %>
+                    <% end %>
+                </td>
+            </tr>
+            <% end %>
+        <% end %>
         <% end %>
         </tbody>
         </table>

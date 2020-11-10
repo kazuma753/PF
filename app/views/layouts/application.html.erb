@@ -10,9 +10,9 @@
   </head>
 
   <body>
-    <header class="head-line clearfix">
+    <header class="head-line clearfix" style="background-color: lightyellow">
       <nav class="nav navbar-nav navbar-left">
-        <h2 class="title">surogram</h2>
+        <h2 class="title" style="color: green">surogram</h2>
       </nav>
       <div class="container"> 
         <h3 class="nav-item">
@@ -22,15 +22,15 @@
             
             <% if user_signed_in? %>
 
-              <li><%= link_to " top",root_path, class: "glyphicon glyphicon-top top"%></li>
+              <li><%= link_to " top",root_path, class: "glyphicon glyphicon-home top"%></li>
 
-              <li><%= link_to " my",my_user_path(current_user.id) , class: "glyphicon glyphicon-my my"%></li>
+              <li><%= link_to " my",my_user_path(current_user.id) , class: "glyphicon glyphicon-user my"%></li>
 
               <li><%= link_to " Logout",destroy_user_session_path, method: :delete , class: "glyphicon glyphicon-log-out logout"%></li>
 
               <% else %>
 
-              <li><%= link_to " top",root_path, class: "glyphicon glyphicon-top top" %></li>
+              <li><%= link_to " top",root_path, class: "glyphicon glyphicon-home top" %></li>
 
               <li><%= link_to " About",home_about_path , class: "glyphicon glyphicon-link about" %></li>
 
@@ -43,12 +43,15 @@
           </nav>
           </div>
         </h3>
-       
       </div>
     </header>
+
       <%= yield %>
-        <div class="col-xs-3 col-xs-offset-9">
-          <p>CopyRight surogram.inc</p>
+      <footer>
+        <div class="footer-text">
+          CopyRight surogram.inc 　|　<%= link_to " 管理者ログイン",new_admin_user_session_path, class: "glyphicon glyphicon-wrench"%>
         </div>
+      </footer>
   </body>
+  
 </html>
