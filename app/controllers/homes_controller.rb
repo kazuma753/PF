@@ -4,15 +4,19 @@ class HomesController < ApplicationController
         @posts = Post.all
         @comment = Comment.new
         @all_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
+        @ranks = Post.find(Comment.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
+        # @test = Post.find(params[:post_id])
+
     end
 
     def search
         # Viewのformで取得したパラメータをモデルに渡す
-        # top と同じアクションの内容にする
         @posts,@users = Post.search(params[:search])
         @post = Post.new
         @comment = Comment.new
         @all_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
+        @ranks = Post.find(Comment.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
+        # @test = Post.find(params[:post_id])
         render 'top'
     end
 

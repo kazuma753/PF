@@ -1,5 +1,6 @@
 <h1><div class="top" style="padding: 20px;">top</div></h1>
-<%= render 'homes/ranks', all_ranks: @all_ranks, post: @post %> 
+<%= render partial: 'homes/ranks', locals: {all_ranks: @all_ranks,ranks: @ranks}, post: @post %>
+<%#= render partial: "list_footer", locals: {username: @username, listname: @listname} %> 
         <table class="table">
 
         <% if @posts[0].class == Post %>
