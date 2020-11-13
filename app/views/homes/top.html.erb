@@ -1,6 +1,5 @@
 <h1><div class="top" style="padding: 20px;">top</div></h1>
 <%= render partial: 'homes/ranks', locals: {all_ranks: @all_ranks,ranks: @ranks}, post: @post %>
-<%#= render partial: "list_footer", locals: {username: @username, listname: @listname} %> 
         <table class="table">
 
         <% if @posts[0].class == Post %>
@@ -10,10 +9,11 @@
             <th>投稿詳細</th>
             <th>投稿画像</th>
             <th>ツイート</th>
-            <th></th>
             <th>Opinion</th>
+            <th></th>
+            <% if user_signed_in? %>
             <th>いいね</th>
-            
+            <% end %>
         </tr>
     </thead>
 
@@ -82,7 +82,9 @@
             <th>ツイート</th>
             <th></th>
             <th>Opinion</th>
-            <th>いいね</th>   
+            <% if user_signed_in? %>
+                <th>いいね</th>
+            <% end %> 
         </tr>
     </thead>
 

@@ -1,50 +1,88 @@
-<table class="table">
-<thead>
-    <tr>
-        <th></th>
-        <th>いいねの多い投稿</th>
-        <th>コメントの多い投稿</th>
-        <th></th>
-        
-    </tr>
-</thead>
-<div class="container">
-  <div class="row">
-        <tbody>
-        <tr>
-        <th></th>
-            <th>
-                <% all_ranks.each.with_index(1) do |all_rank,i| %>
-                    <p><%= i %> 位</p>
-                        <%= link_to user_path(all_rank.user) do %>
-                            <%= attachment_image_tag all_rank.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %>
-                        <% end %>
-                        <%= link_to post_path(all_rank) do %> 
-                            <%= all_rank.user.name %> さんの投稿
-                            <%= attachment_image_tag all_rank, :image, format: 'jpeg', fallback: "no_image.jpg", size: "120x120" %>
-                        <% end %>
-                        <%= all_rank.body %> |
-                    いいね <%= all_rank.favorites.count %>
-                <% end %>
-            </th>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>いいねが多い投稿</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% all_ranks.each.with_index(1) do |all_rank,i| %>
 
-            <th>
-                <% ranks.each.with_index(1) do |rank,i| %>
-                    <p><%= i %> 位</p>
-                    <%= link_to user_path(rank.user) do %>
-                        <%= attachment_image_tag rank.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %>
+                        <tr>
+                            <td>
+                                <p><%= i %> 位</p>
+                            </td>
+
+                            <td>
+                                <%= link_to user_path(all_rank.user) do %>
+                                    <%= attachment_image_tag all_rank.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %><br>
+                                    <%= all_rank.user.name %>
+                                <% end %>
+                            </td>
+
+                            <td>
+                                <%= link_to post_path(all_rank) do %>
+                                    <div class="text"><%= attachment_image_tag all_rank, :image, format: 'jpeg', fallback: "no_image.jpg", size: "120x120" %></div><br>
+                                    <p>投稿詳細ページへ</p>
+                                <% end %>
+                            </td>
+                        
+                            <td class="kkk">
+                                <%= all_rank.body %>
+                            </td>
+
+                            <td>
+                                | いいね <%= all_rank.favorites.count %>
+                            </td>
+                        </tr>
                     <% end %>
-                    <%= link_to post_path(rank) do %> 
-                        <%= rank.user.name %>さんの投稿
-                        <%= attachment_image_tag rank, :image, format: 'jpeg', fallback: "no_image.jpg", size: "120x120" %>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <table class="table">
+                <thead>
+                        <tr>
+                            <th>コメントが多い投稿</th>
+                        </tr>
+                </thead>
+                <tbody>
+                    <% ranks.each.with_index(1) do |rank,i| %>
+                        <tr>
+                            <td>
+                                <p><%= i %> 位</p>
+                            </td>
+
+                            <td>
+                                <%= link_to user_path(rank.user) do %>
+                                    <%= attachment_image_tag rank.user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "60x60" %>
+                                <% end %><br>
+                                <%= rank.user.name %>
+                            </td>
+
+                            <td>
+                                <%= link_to post_path(rank) do %> 
+                                    <%= attachment_image_tag rank, :image, format: 'jpeg', fallback: "no_image.jpg", size: "120x120" %>
+                                    <p>投稿詳細ページへ</p>
+                                <% end %>
+                            </td>
+                        
+                            <td class="kkk">
+                                <%= rank.body %>
+                            </td>
+
+                            <td>
+                                <%= rank.comment %>
+                                | コメント数 <%= rank.comments.count %>
+                            </td>
+                        <tr>
                     <% end %>
-                    <%= rank.body %>
-                    <%= rank.comment %> |
-                    コメント数 <%= rank.comments.count %>
-                <% end %>
-            </th>
-        </tr>
-        </tbody>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
-</table>
+
