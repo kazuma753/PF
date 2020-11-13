@@ -12,7 +12,15 @@
     display: block;
     clear: both;
   }
-  
+  .test {
+    color:red;
+    padding: 50px;
+  }
+
+  table td {
+    word-break : break-all;
+    }
+
   .head-line{
   background-color: bisque;
   }
