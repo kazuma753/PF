@@ -4,6 +4,7 @@
         <thead>
             <tr>
                 <th></th>
+                <th>投稿画像投稿画像</th>
                 <th>ツイート</th>
                 <th>Opinion</th>
                 <th>いいね</th>
@@ -17,7 +18,11 @@
                 </td>
 
                 <td>
-                <%=@post.body%>
+                    <%= attachment_image_tag @post, :image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
+                </td>
+
+                <td>
+                    <%=@post.body%>
                 </td>
 
                 <td>

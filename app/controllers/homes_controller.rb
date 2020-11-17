@@ -25,6 +25,7 @@ class HomesController < ApplicationController
 
     def create
         post = Post.find(params[:post_id])
+        post.score = Language.get_data(post[:body])
         comment = current_user.comments.new(comment_params)
         comment.post_id = post.id
         comment.save
