@@ -48,6 +48,7 @@
                             <th></th>
                             <th>投稿画像</th>
                             <th>ツイート</th>
+                            <th>感情分析</th>
                             <th>Opinion</th>
                             <th>いいね</th>
                             
@@ -66,6 +67,10 @@
 
                         <td>
                             <%= post.body %>
+                        </td>
+
+                        <td>
+                            <span class="sentiment-score">ツイートの感情分析スコア<%= post.score %></span>
                         </td>
 
                         <td>
