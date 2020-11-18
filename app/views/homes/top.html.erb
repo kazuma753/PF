@@ -94,6 +94,7 @@
                     <%= submit_tag 'Search', :name => nil %>
                 <% end %>
             <tbody>
+                <% if @users.present? %>
                 <% @users.each do |post| %>
                 <% post.posts.each do |post| %>
                     <tr>
@@ -145,6 +146,7 @@
                         </td>
                     </tr>
                     <% end %>
+                <% end %>
                 <% end %>
                 <% end %>
             </tbody>
