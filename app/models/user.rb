@@ -6,9 +6,6 @@ class User < ApplicationRecord
 
         validates :name, length: {maximum: 20}
         validates :introduction, length: {maximum: 10}
-        # def posts
-        #   return Post.where(user_id: self.id)
-        # end
         
         has_many :posts, dependent: :destroy
         has_many :comments, dependent: :destroy
