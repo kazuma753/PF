@@ -24,6 +24,12 @@
     box-sizing: border-box;
 }
 
+.clearfix::after {
+    content: "";
+    display: block;
+    clear: both;
+    }
+
 .kkk{
     width: 15%;
     word-break : break-all;
@@ -42,6 +48,8 @@ footer{
     text-align: center;
     line-height: 120px;
     background-color: lightgreen;
+    position: absolute;/*←絶対位置*/
+    bottom: 0; /*下に固定*/
 }
     .footer-text {
         padding-right: 20px;
