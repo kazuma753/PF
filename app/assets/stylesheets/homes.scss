@@ -1,21 +1,8 @@
 // Place all the styles related to the homes controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+
   
-  .clearfix::after {
-    content: "";
-    display: block;
-    clear: both;
-  }
-  .test {
-    color:red;
-    padding: 50px;
-  }
 
   table td {
     word-break : break-all;
@@ -43,11 +30,13 @@
   }
 
   .about{
-    color: red;
     text-align: center;
-    margin: 20px;
   }
 
   .about-text{
     float: inline-start;
+  }
+
+  .about-image{
+    width:100%;
   }

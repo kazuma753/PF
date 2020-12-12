@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-3">
-            <div class="col-xs-6">
+            <div class="col-xs-12">
             <%= attachment_image_tag user, :profile_image, format: 'jpeg', fallback: "no_image.jpg", size: "100x100" %>
                 <div class="test">
                     <% if user_signed_in? %>
