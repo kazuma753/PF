@@ -20,8 +20,13 @@ module Language
         request = Net::HTTP::Post.new(uri.request_uri)
         request['Content-Type'] = 'application/json'
         response = https.request(request, params)
-        # APIレスポンス出力
-        JSON.parse(response.body)['documentSentiment']['score']
+        case response.code
+            when "200" then
+            # APIレスポンス出力
+            JSON.parse(response.body)['documentSentiment']['score']
+            else
+                raise("error!!")
+            end
         end
     end
 end
