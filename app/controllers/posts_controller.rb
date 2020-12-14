@@ -18,7 +18,13 @@ class PostsController < ApplicationController
 
     def create
         @post = Post.new(post_params)
-        @post.score = Language.get_data(post_params[:body])
+        # 例外処理 (redirect_toが２つある時は、and return を書いてあげないと下の記述まで反応してしまうので注意)
+        begin 
+            @post.score = Language.get_data(post_params[:body])
+        rescue => e
+            p e
+            redirect_to my_user_path(errormessage:e.message) and return
+        end
         @post.user_id = current_user.id
         if @post.save
             redirect_to my_user_path(current_user.id)
