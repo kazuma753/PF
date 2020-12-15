@@ -1,5 +1,8 @@
 ja:   
   devise:
     failure:
-        user:
-          invalid: ・メールアドレスもしくはパスワードが不正です
+      user:
+        invalid: ・メールアドレスもしくはパスワードが不正です
+    sessions:
+      user:
+        signed_out: ログアウトしました
