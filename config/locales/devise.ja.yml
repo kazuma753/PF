@@ -2,7 +2,11 @@ ja:
   devise:
     failure:
       user:
-        invalid: ・メールアドレスもしくはパスワードが不正です
+        invalid: ・メールアドレスもしくはパスワードが不正です！
     sessions:
       user:
-        signed_out: ログアウトしました
+        signed_out: ログアウトしました！
+        signed_in:  ログインしました！
+    registrations:
+      user:
+        signed_up:  サインアップに成功しました！
