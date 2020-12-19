@@ -2,6 +2,7 @@ class PostsController < ApplicationController
     before_action :correct_user, only: [:edit, :update, :destroy]
     def new
         @post = Post.new
+        # @posts = @user.posts
     end
 
     def show
