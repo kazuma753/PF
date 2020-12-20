@@ -30,7 +30,7 @@ class UsersController < ApplicationController
     def update
         @user = User.find(params[:id])#ユーザーの情報を特定する
         if @user.update(user_params)#更新する
-            redirect_to my_user_path(@user),notice: 'You have updated user successfully.'
+            redirect_to my_user_path(@user),notice: 'ユーザー情報を変更しました！'
         else
             render :edit
         end
