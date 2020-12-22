@@ -20,7 +20,7 @@ class PostsController < ApplicationController
     def create
         @post = Post.new(post_params)
         # 例外処理 (redirect_toが２つある時は、and return を書いてあげないと下の記述まで反応してしまうので注意)
-        begin 
+        begin
             @post.score = Language.get_data(post_params[:body])
         rescue => e
             p e
