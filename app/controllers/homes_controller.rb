@@ -3,10 +3,10 @@ class HomesController < ApplicationController
         @post = Post.new
         @posts = Post.all
         @comment = Comment.new
+        # 下記、いいね数のランキング
         @all_ranks = Post.find(Favorite.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
+        # 下記、コメント数のランキング
         @ranks = Post.find(Comment.group(:post_id).order('count(post_id) desc').limit(3).pluck(:post_id))
-        # @test = Post.find(params[:post_id])
-
     end
 
     def search
